@@ -1,0 +1,117 @@
+{
+  "categories": [
+    {
+      "background": "color\u003d#623E3E",
+      "id": "b4ddc473-b6c3-4ed1-aceb-cdaf43fb6725",
+      "name": "Shiori",
+      "shortcuts": [
+        {
+          "codeOnPrepare": "if (getVariable(/*[variable]*/\"38c78321-be77-4a89-8bb3-9da47c3bd5ca\"/*[/variable]*/) \u003d\u003d \"\") {\n    setVariable(/*[variable]*/\"38c78321-be77-4a89-8bb3-9da47c3bd5ca\"/*[/variable]*/, prompt(\"Please enter your Shiori API URL\"));\n}\nif (getVariable(/*[variable]*/\"25ddf72e-2dd9-4534-ba9d-46885a15e379\"/*[/variable]*/) \u003d\u003d \"\") {\n    setVariable(/*[variable]*/\"25ddf72e-2dd9-4534-ba9d-46885a15e379\"/*[/variable]*/, prompt(\"Please enter your Shiori username\"));\n}\nif (getVariable(/*[variable]*/\"e562ba22-cf0f-4786-82ef-d972c63c8af8\"/*[/variable]*/) \u003d\u003d \"\") {\n    setVariable(/*[variable]*/\"e562ba22-cf0f-4786-82ef-d972c63c8af8\"/*[/variable]*/, promptPassword(\"Please enter your Shiori password\"));\n}",
+          "description": "Asks for Shiori URL, user and password",
+          "executionType": "scripting",
+          "iconName": "custom-icon_x1682258897825.png",
+          "id": "6acbd486-fde8-4e7d-9950-77b79e19f7ea",
+          "name": "Setup Shiori Variables"
+        },
+        {
+          "bodyContent": "{\n  \"username\": \"{{25ddf72e-2dd9-4534-ba9d-46885a15e379}}\",\n  \"password\": \"{{e562ba22-cf0f-4786-82ef-d972c63c8af8}}\",\n  \"remember\": true,\n  \"owner\": true\n}",
+          "codeOnPrepare": "executeShortcut(/*[shortcut]*/\"6acbd486-fde8-4e7d-9950-77b79e19f7ea\"/*[/shortcut]*/);",
+          "codeOnSuccess": "setVariable(/*[variable]*/\"cc8251ad-1fdf-41cb-865b-8667c77aaa6f\"/*[/variable]*/, JSON.parse(response.body).session);",
+          "contentType": "application/json",
+          "description": "Login to Shiori",
+          "iconName": "custom-icon_x1682258897825.png",
+          "id": "f43706a9-6f06-4cf8-be85-59275db7e028",
+          "method": "POST",
+          "name": "Login",
+          "responseHandling": {
+            "failureOutput": "simple",
+            "successMessage": "Login successful.\nSession ID was saved.",
+            "successOutput": "none",
+            "uiType": "toast"
+          },
+          "retryPolicy": "wait_for_internet",
+          "url": "{{38c78321-be77-4a89-8bb3-9da47c3bd5ca}}/api/login"
+        },
+        {
+          "bodyContent": "{\n  \"url\": \"{{a6c1fa8c-1cff-4d72-80bb-fb395b32f164}}\"\n}",
+          "codeOnFailure": "if (getVariable(/*[variable]*/\"cc8251ad-1fdf-41cb-865b-8667c77aaa6f\"/*[/variable]*/)) {\n    enqueueShortcut(/*[shortcut]*/\"213d6205-6c8b-4681-a24d-170cc3820916\"/*[/shortcut]*/);\n}",
+          "codeOnPrepare": "if (getVariable(/*[variable]*/\"cc8251ad-1fdf-41cb-865b-8667c77aaa6f\"/*[/variable]*/) \u003d\u003d \"\") {\n    executeShortcut(/*[shortcut]*/\"f43706a9-6f06-4cf8-be85-59275db7e028\"/*[/shortcut]*/);\n}",
+          "codeOnSuccess": "if (getVariable(/*[variable]*/\"cc8251ad-1fdf-41cb-865b-8667c77aaa6f\"/*[/variable]*/)) {\n    enqueueShortcut(/*[shortcut]*/\"213d6205-6c8b-4681-a24d-170cc3820916\"/*[/shortcut]*/);\n}",
+          "contentType": "application/json",
+          "description": "Add bookmark to Shiori",
+          "headers": [
+            {
+              "id": "a8579ddb-8393-4226-97a8-50a648e08e3d",
+              "key": "X-Session-Id",
+              "value": "{{cc8251ad-1fdf-41cb-865b-8667c77aaa6f}}"
+            }
+          ],
+          "iconName": "custom-icon_x1682258897825.png",
+          "id": "8a0d92c7-77e7-4422-b3cf-bb5f995a0e59",
+          "method": "POST",
+          "name": "Add Bookmark",
+          "responseHandling": {
+            "failureOutput": "simple",
+            "successMessage": "{{a6c1fa8c-1cff-4d72-80bb-fb395b32f164}} was sent to Shiori.",
+            "successOutput": "message",
+            "uiType": "toast"
+          },
+          "retryPolicy": "wait_for_internet",
+          "url": "{{38c78321-be77-4a89-8bb3-9da47c3bd5ca}}/api/bookmarks"
+        },
+        {
+          "codeOnSuccess": "setVariable(/*[variable]*/\"cc8251ad-1fdf-41cb-865b-8667c77aaa6f\"/*[/variable]*/, \"\");",
+          "description": "Log out of Shiori",
+          "headers": [
+            {
+              "id": "cf27e5a2-08dd-4e22-93df-21abe3b06d1f",
+              "key": "X-Session-Id",
+              "value": "{{cc8251ad-1fdf-41cb-865b-8667c77aaa6f}}"
+            }
+          ],
+          "iconName": "custom-icon_x1682258897825.png",
+          "id": "213d6205-6c8b-4681-a24d-170cc3820916",
+          "method": "POST",
+          "name": "Logout",
+          "responseHandling": {
+            "failureOutput": "simple",
+            "successMessage": "Logout successful.",
+            "successOutput": "none",
+            "uiType": "toast"
+          },
+          "retryPolicy": "wait_for_internet",
+          "url": "{{38c78321-be77-4a89-8bb3-9da47c3bd5ca}}/api/logout"
+        }
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "flags": 1,
+      "id": "a6c1fa8c-1cff-4d72-80bb-fb395b32f164",
+      "key": "shiori_add_url",
+      "type": "text"
+    },
+    {
+      "id": "25ddf72e-2dd9-4534-ba9d-46885a15e379",
+      "key": "shiori_username",
+      "value": ""
+    },
+    {
+      "id": "e562ba22-cf0f-4786-82ef-d972c63c8af8",
+      "key": "shiori_password",
+      "value": ""
+    },
+    {
+      "id": "38c78321-be77-4a89-8bb3-9da47c3bd5ca",
+      "key": "shiori_url",
+      "value": ""
+    },
+    {
+      "id": "cc8251ad-1fdf-41cb-865b-8667c77aaa6f",
+      "key": "shiori_sessionid",
+      "value": ""
+    }
+  ],
+  "version": 59
+}
