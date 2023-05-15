@@ -5,7 +5,7 @@
 ---
 
 # 💌 Send to Shiori
-Share files and URLs on Android into Shiori
+Share URLs on Android into [Shiori](https://github.com/go-shiori/shiori)
 
 ## 🛠️ Setup
   - Download [HTTP Shortcuts](https://http-shortcuts.rmy.ch/)
