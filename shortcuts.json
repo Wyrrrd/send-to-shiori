@@ -6,7 +6,7 @@
       "name": "Shiori",
       "shortcuts": [
         {
-          "codeOnPrepare": "if (getVariable(/*[variable]*/\"38c78321-be77-4a89-8bb3-9da47c3bd5ca\"/*[/variable]*/) \u003d\u003d \"\") {\n    setVariable(/*[variable]*/\"38c78321-be77-4a89-8bb3-9da47c3bd5ca\"/*[/variable]*/, prompt(\"Please enter your Shiori API URL\"));\n}\nif (getVariable(/*[variable]*/\"25ddf72e-2dd9-4534-ba9d-46885a15e379\"/*[/variable]*/) \u003d\u003d \"\") {\n    setVariable(/*[variable]*/\"25ddf72e-2dd9-4534-ba9d-46885a15e379\"/*[/variable]*/, prompt(\"Please enter your Shiori username\"));\n}\nif (getVariable(/*[variable]*/\"e562ba22-cf0f-4786-82ef-d972c63c8af8\"/*[/variable]*/) \u003d\u003d \"\") {\n    setVariable(/*[variable]*/\"e562ba22-cf0f-4786-82ef-d972c63c8af8\"/*[/variable]*/, promptPassword(\"Please enter your Shiori password\"));\n}",
+          "codeOnPrepare": "if (getVariable(/*[variable]*/\"38c78321-be77-4a89-8bb3-9da47c3bd5ca\"/*[/variable]*/) \u003d\u003d \"\") {\n    setVariable(/*[variable]*/\"38c78321-be77-4a89-8bb3-9da47c3bd5ca\"/*[/variable]*/, prompt(\"Please enter your Shiori URL\"));\n}\n\nif (getVariable(/*[variable]*/\"38c78321-be77-4a89-8bb3-9da47c3bd5ca\"/*[/variable]*/) \u003d\u003d \"\") {\n    showToast(\"Shiori URL still empty, aborting.\");\n    abort();\n}\n\n\nif (getVariable(/*[variable]*/\"25ddf72e-2dd9-4534-ba9d-46885a15e379\"/*[/variable]*/) \u003d\u003d \"\") {\n    setVariable(/*[variable]*/\"25ddf72e-2dd9-4534-ba9d-46885a15e379\"/*[/variable]*/, prompt(\"Please enter your Shiori username\"));\n}\n\nif (getVariable(/*[variable]*/\"25ddf72e-2dd9-4534-ba9d-46885a15e379\"/*[/variable]*/) \u003d\u003d \"\") {\n    showToast(\"Shiori username still empty, aborting.\");\n    abort();\n}\n\n\nif (getVariable(/*[variable]*/\"e562ba22-cf0f-4786-82ef-d972c63c8af8\"/*[/variable]*/) \u003d\u003d \"\") {\n    setVariable(/*[variable]*/\"e562ba22-cf0f-4786-82ef-d972c63c8af8\"/*[/variable]*/, promptPassword(\"Please enter your Shiori password\"));\n}\n\nif (getVariable(/*[variable]*/\"e562ba22-cf0f-4786-82ef-d972c63c8af8\"/*[/variable]*/) \u003d\u003d \"\") {\n    showToast(\"Shiori username still empty, aborting.\");\n    abort();\n}",
           "description": "Asks for Shiori URL, user and password",
           "executionType": "scripting",
           "iconName": "custom-icon_x1682258897825.png",
@@ -109,8 +109,7 @@
     },
     {
       "id": "cc8251ad-1fdf-41cb-865b-8667c77aaa6f",
-      "key": "shiori_sessionid",
-      "value": ""
+      "key": "shiori_sessionid"
     }
   ],
   "version": 59
